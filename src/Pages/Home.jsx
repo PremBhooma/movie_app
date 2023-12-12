@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { auth } from "../Firebase/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Routes/AuthContext";
 
 const Home = () => {
+  const { token, setToken } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const user = auth.currentUser;
@@ -11,7 +14,9 @@ const Home = () => {
     const userName = user.displayName;
     const userEmail = user.email;
     const userPhoto = user.photoURL;
+    const accessToken = user.accessToken;
 
+    localStorage.setItem("accessToken", accessToken);
     document.getElementById("userName").textContent = userName;
     document.getElementById("email").textContent = userEmail;
     document.getElementById("userPhoto").src = userPhoto;
@@ -32,6 +37,16 @@ const Home = () => {
       <p id="userName"></p>
       <p id="email"></p>
       <img id="userPhoto" />
+
+      <Link
+        to={"/"}
+        onClick={() => {
+          localStorage.clear("accessToken");
+          setToken(null);
+        }}
+      >
+        Logout
+      </Link>
     </>
   );
 };
