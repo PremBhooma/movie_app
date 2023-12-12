@@ -1,44 +1,70 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { auth } from "../Firebase/firebaseConfig";
-import { onAuthStateChanged } from "firebase/auth";
+import { signOut } from "firebase/auth";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../Routes/AuthContext";
+import { auth } from "../Firebase/firebaseConfig";
+// import { Link } from "react-router-dom";
+// import { auth } from "../Firebase/firebaseConfig";
+// import { onAuthStateChanged } from "firebase/auth";
+// import { AuthContext } from "../Routes/AuthContext";
+// import Header from "../Components/Header";
 
 const Home = () => {
-  const { token, setToken } = useContext(AuthContext);
+  const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
 
-  const user = auth.currentUser;
-  const singleUserDetails = () => {
-    const userName = user.displayName;
-    const userEmail = user.email;
-    const userPhoto = user.photoURL;
-    const accessToken = user.accessToken;
-
-    localStorage.setItem("accessToken", accessToken);
-    document.getElementById("userName").textContent = userName;
-    document.getElementById("email").textContent = userEmail;
-    document.getElementById("userPhoto").src = userPhoto;
-  };
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      singleUserDetails(user);
-      const uid = user.uid;
-      return uid;
-    } else {
-      alert("create Account & login");
-      navigate(`/`);
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("user");
+      navigate("/login");
+    } catch (err) {
+      console.log(err);
     }
-  });
+  };
+  //   const { token, setToken } = useContext(AuthContext);
+  //   const navigate = useNavigate();
+
+  //   let userName, userPhoto, userEmail;
+
+  //   const user = auth.currentUser;
+  //   console.log(user.displayName);
+
+  //   const displayName = user ? user.displayName : "Guest";
+  //   const photoURL = user ? user.photoURL : "";
+
+  //   const singleUserDetails = () => {
+  //     userName = user.displayName;
+  //     userEmail = user.email;
+  //     userPhoto = user.photoURL;
+
+  //     document.getElementById("userName").textContent = userName;
+  //     document.getElementById("email").textContent = userEmail;
+  //     document.getElementById("userPhoto").src = userPhoto;
+  //   };
+
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       singleUserDetails(user);
+  //       const uid = user.uid;
+  //       return uid;
+  //     } else {
+  //       alert("create Account & login");
+  //       navigate(`/`);
+  //     }
+  //   });
   return (
     <>
-      <p id="userName"></p>
-      <p id="email"></p>
-      <img id="userPhoto" />
+      {/* <Header /> */}
 
-      <Link
+      <p>{user && user.email}</p>
+      <p id="email"></p>
+      {user && <img src={user.photoURL} />}
+
+      <hr />
+
+      <button onClick={handleLogout}>Logout</button>
+      {/* <Link
         to={"/"}
         onClick={() => {
           localStorage.clear("accessToken");
@@ -46,7 +72,7 @@ const Home = () => {
         }}
       >
         Logout
-      </Link>
+      </Link> */}
     </>
   );
 };
