@@ -13,3 +13,7 @@
 .card {
   border: none;
 }
+
+.lineNone {
+  text-decoration: none;
+}

@@ -7,6 +7,7 @@ import Login from './Pages/Login';
 import Protected from './Components/Protected';
 import Home from './Pages/Home';
 import { AuthContextProvider } from './Routes/AuthContext';
+import MovieDetails from './Components/MovieDetails';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -14,6 +15,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="/" element={<Protected />} >
         <Route path="/" index element={<Home />} />
+        <Route path="/home/:id" element={<MovieDetails />}></Route>
       </Route>
     </Route>
   )
