@@ -7,6 +7,7 @@ import { auth } from "../Firebase/firebaseConfig";
 // import { onAuthStateChanged } from "firebase/auth";
 // import { AuthContext } from "../Routes/AuthContext";
 import Header from "../Components/Header";
+import Movie from "../Components/Movie";
 
 const Home = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -60,7 +61,7 @@ const Home = () => {
         image={user.photoURL}
         handleLogout={handleLogout}
       />
-
+      <Movie />
       {/* <button onClick={handleLogout}>Logout</button> */}
       {/* <Link
         to={"/"}
