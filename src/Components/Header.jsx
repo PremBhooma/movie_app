@@ -1,7 +1,7 @@
 import React from "react";
 import "../Components/Header.css";
 
-const Header = () => {
+const Header = ({ displayName, image, handleLogout }) => {
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -52,8 +52,8 @@ const Header = () => {
             <ul className="navbar-nav mb-2 mb-lg-0">
               <li className="nav-item dropdown">
                 <img
-                  id="userPhoto"
-                  //   src="https://play-lh.googleusercontent.com/C9CAt9tZr8SSi4zKCxhQc9v4I6AOTqRmnLchsu1wVDQL0gsQ3fmbCVgQmOVM1zPru8UH=w240-h480-rw"
+                  // id="userPhoto"
+                  src={image}
                   className="logo mx-auto d-block nav-link dropdown-toggle"
                   alt="..."
                   role="button"
@@ -62,17 +62,17 @@ const Header = () => {
                 ></img>
                 <ul className="dropdown-menu">
                   <li>
-                    <a className="dropdown-item" id="userName"></a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" id="email"></a>
+                    <a className="dropdown-item">{displayName}</a>
                   </li>
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
+                    <a
+                      className="dropdown-item logoutHand"
+                      onClick={handleLogout}
+                    >
+                      Logout
                     </a>
                   </li>
                 </ul>

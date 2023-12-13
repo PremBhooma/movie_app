@@ -6,7 +6,7 @@ import { auth } from "../Firebase/firebaseConfig";
 // import { auth } from "../Firebase/firebaseConfig";
 // import { onAuthStateChanged } from "firebase/auth";
 // import { AuthContext } from "../Routes/AuthContext";
-// import Header from "../Components/Header";
+import Header from "../Components/Header";
 
 const Home = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -55,15 +55,13 @@ const Home = () => {
   //   });
   return (
     <>
-      {/* <Header /> */}
+      <Header
+        displayName={user.displayName}
+        image={user.photoURL}
+        handleLogout={handleLogout}
+      />
 
-      <p>{user && user.email}</p>
-      <p id="email"></p>
-      {user && <img src={user.photoURL} />}
-
-      <hr />
-
-      <button onClick={handleLogout}>Logout</button>
+      {/* <button onClick={handleLogout}>Logout</button> */}
       {/* <Link
         to={"/"}
         onClick={() => {

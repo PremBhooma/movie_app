@@ -9,3 +9,7 @@
   height: 55px;
   border-radius: 50%;
 }
+
+.logoutHand {
+  cursor: pointer;
+}
