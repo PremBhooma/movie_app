@@ -42,6 +42,20 @@ const MovieDetails = () => {
 
   const baseImageUrl = "https://image.tmdb.org/t/p/w500";
 
+  const releaseDate = movies.release_date
+    ? new Date(movies.release_date)
+    : new Date();
+
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+
+  const formattedReleaseDate = new Intl.DateTimeFormat("en-US", options).format(
+    releaseDate
+  );
+
   return (
     <>
       <Header
@@ -66,9 +80,11 @@ const MovieDetails = () => {
               />
             </div>
             <div className="col-md-8 overlay-content">
-              <h2>{movies.title}</h2>
+              <h1>{movies.title}</h1>
+              <p>{formattedReleaseDate}</p>
+
+              <h3>Overview</h3>
               <p>{movies.overview}</p>
-              <p>Release Date: {movies.release_date}</p>
             </div>
           </div>
         </div>

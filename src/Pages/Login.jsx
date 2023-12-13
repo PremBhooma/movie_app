@@ -6,7 +6,6 @@ import { auth, googleAuthProvider } from "../Firebase/firebaseConfig";
 
 const Login = () => {
   const navigate = useNavigate();
-  //   const { token, setToken } = useContext(AuthContext);
 
   const handleGoogle = async () => {
     try {
@@ -18,36 +17,9 @@ const Login = () => {
     } catch (error) {
       console.log(error);
     }
-    // const provider = await new GoogleAuthProvider();
-    // return signInWithPopup(auth, provider)
-    //   .then((result) => {
-    //     const credential = GoogleAuthProvider.credentialFromResult(result);
-    //     const token = credential.accessToken;
-    //     const user = result.user;
-    //     let accessToken = user.accessToken;
-    //     localStorage.setItem("accessToken", accessToken);
-    //     console.log(accessToken);
-    //     onAuthStateChanged(auth, (user) => {
-    //       if (user) {
-    //         const uid = user.uid;
-    //         return uid;
-    //       } else {
-    //         alert("create Account & login");
-    //         navigate(`/`);
-    //       }
-    //     });
-    //     navigate(`/Home`);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
   return (
     <>
-      {/* <div>
-        <button onClick={handleGoogle}>Google</button>
-      </div> */}
-
       <section className="vh-100 gradient-custom">
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -56,9 +28,11 @@ const Login = () => {
                 className="card bg-dark text-white"
                 style={{ borderRadius: "1rem" }}
               >
-                <div className="card-body text-center">
+                <div className="card-body text-center" id="crdrr">
                   <div className="mb-md-5 mt-md-4 pb-5">
-                    <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
+                    <h2 className="fw-bold mb-2 text-uppercase">
+                      Welcome to Movie App
+                    </h2>
                     <p className="text-white-50 mb-5">
                       Please sign in with Google!
                     </p>
