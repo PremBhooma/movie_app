@@ -1,0 +1,15 @@
+.bootImg {
+  height: 500px;
+  object-fit: fill;
+}
+
+.tlt {
+  max-width: 380px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card {
+  border: none;
+}
